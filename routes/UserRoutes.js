@@ -11,7 +11,7 @@ const userController = require("../controllers/userController");
 router.post("/register", userController.createUser);
 router.post("/login", userController.loginUser);
 
-router.get("/", userController.getUser);
+// router.get("/", userController.getUser);
 router.get("/me", authMiddleware, (req, res) => {
   res.json({
     message: "User data",
