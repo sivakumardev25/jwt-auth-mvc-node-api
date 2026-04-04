@@ -87,13 +87,13 @@ exports.getUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
-
-    const user = await User.findOne({ email });
+    // console.log(req.body);
 
     if (!email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
+
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -117,7 +117,9 @@ exports.loginUser = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Server error" });
+    console.log("LOGIN ERROR:", error); // 👈 IMPORTANT
+    res.status(500).json({ message: "Server error", error: error.message });
+    // console.log(error);
+    // res.status(500).json({ message: "Server error" });
   }
 };
